@@ -14,13 +14,9 @@ const Hero = () => {
 			</div>
 			<h1>Hi, I&apos;m Scythe</h1>
 			<p>
-				Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer
-				fringilla justo orci, vitae lobortis leo rutrum vitae. Donec non
-				consectetur eros. Aenean eu nibh justo. Phasellus nec erat tellus. Cras
-				nec nulla consequat magna dictum placerat. Aliquam ultrices dictum
-				sapien, in volutpat lacus lobortis non. Nullam nec dapibus sem, eget
-				scelerisque dui. Curabitur suscipit justo sed felis condimentum
-				hendrerit. Quisque accumsan mollis nisi, eu eleifend risus pharetra in.
+				Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras sit amet
+				leo in velit rhoncus tristique sit amet at nibh. Integer sit amet erat
+				at magna scelerisque semper.
 			</p>
 		</section>
 	)
