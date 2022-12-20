@@ -9,6 +9,8 @@ const DUMMY_POSTS = [
 		excerpt:
 			'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras sit amet leo in velit rhoncus tristique sit amet at nibh. Integer sit amet erat at magna scelerisque semper.',
 		date: '2022-12-16',
+		content: '',
+		isFeatured: true,
 	},
 	{
 		slug: 'getting-started-with-react',
@@ -17,6 +19,8 @@ const DUMMY_POSTS = [
 		excerpt:
 			'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras sit amet leo in velit rhoncus tristique sit amet at nibh. Integer sit amet erat at magna scelerisque semper.',
 		date: '2022-12-14',
+		content: '',
+		isFeatured: true,
 	},
 	{
 		slug: 'getting-started-with-html',
@@ -25,6 +29,8 @@ const DUMMY_POSTS = [
 		excerpt:
 			'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras sit amet leo in velit rhoncus tristique sit amet at nibh. Integer sit amet erat at magna scelerisque semper.',
 		date: '2022-10-22',
+		content: '',
+		isFeatured: true,
 	},
 	{
 		slug: 'getting-started-with-js',
@@ -33,6 +39,8 @@ const DUMMY_POSTS = [
 		excerpt:
 			'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras sit amet leo in velit rhoncus tristique sit amet at nibh. Integer sit amet erat at magna scelerisque semper.',
 		date: '2022-04-29',
+		content: '',
+		isFeatured: true,
 	},
 ]
 

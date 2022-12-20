@@ -1,10 +1,11 @@
-export type Post = {
+export type PostData = {
 	title: string
 	image: string
 	excerpt: string
 	date: string
-	slug: string
+	isFeatured: boolean
 }
+export type Post = PostData & { slug: string; content: string }
 
 //? PROPS ?//
 export type AllPostsPageProps = {
