@@ -6,6 +6,14 @@ export type Post = {
 	slug: string
 }
 
+export type AllPostsPageProps = {
+	// posts: Post[]
+}
+
+export type AllPostsProps = {
+	posts: Post[]
+}
+
 export type PostsGridProps = {
 	posts: Post[]
 }
