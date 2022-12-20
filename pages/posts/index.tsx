@@ -1,5 +1,5 @@
 import { AllPostsPageProps } from '../../types/post'
-import AllPosts from './all-posts'
+import AllPosts from '../../components/posts/all-posts'
 
 const DUMMY_POSTS = [
 	{

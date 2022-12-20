@@ -1,4 +1,4 @@
-import PostsGrid from '../../components/posts/posts-grid'
+import PostsGrid from './posts-grid'
 import { AllPostsProps } from '../../types/post'
 import classes from './all-posts.module.css'
 
