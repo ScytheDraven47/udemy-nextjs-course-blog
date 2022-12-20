@@ -6,9 +6,12 @@ export type Post = {
 	slug: string
 }
 
+//? PROPS ?//
 export type AllPostsPageProps = {
 	// posts: Post[]
 }
+
+export type PostHeaderProps = Pick<Post, 'title' | 'image'>
 
 export type AllPostsProps = {
 	posts: Post[]
