@@ -1,55 +1,25 @@
 import FeaturedPosts from '../components/home-page/featured-posts'
 import Hero from '../components/home-page/hero'
+import { getFeaturedPosts } from '../lib/posts-util'
+import { HomePageProps } from '../types/post'
 
-const DUMMY_POSTS = [
-	{
-		slug: 'getting-started-with-next-js',
-		title: 'Getting Started with NextJS',
-		image: 'getting-started-with-next-js.png',
-		excerpt:
-			'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras sit amet leo in velit rhoncus tristique sit amet at nibh. Integer sit amet erat at magna scelerisque semper.',
-		date: '2022-12-16',
-		content: '',
-		isFeatured: true,
-	},
-	{
-		slug: 'getting-started-with-react',
-		title: 'Getting Started with React',
-		image: 'getting-started-with-react.png',
-		excerpt:
-			'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras sit amet leo in velit rhoncus tristique sit amet at nibh. Integer sit amet erat at magna scelerisque semper.',
-		date: '2022-12-14',
-		content: '',
-		isFeatured: true,
-	},
-	{
-		slug: 'getting-started-with-html',
-		title: 'Getting Started with HTML',
-		image: 'getting-started-with-html.png',
-		excerpt:
-			'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras sit amet leo in velit rhoncus tristique sit amet at nibh. Integer sit amet erat at magna scelerisque semper.',
-		date: '2022-10-22',
-		content: '',
-		isFeatured: true,
-	},
-	{
-		slug: 'getting-started-with-js',
-		title: 'Getting Started with JS',
-		image: 'getting-started-with-js.png',
-		excerpt:
-			'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras sit amet leo in velit rhoncus tristique sit amet at nibh. Integer sit amet erat at magna scelerisque semper.',
-		date: '2022-04-29',
-		content: '',
-		isFeatured: true,
-	},
-]
-
-const HomePage = () => {
+const HomePage = ({ posts }: HomePageProps) => {
 	return (
 		<>
 			<Hero />
-			<FeaturedPosts posts={DUMMY_POSTS} />
+			<FeaturedPosts posts={posts} />
 		</>
 	)
 }
+
+export function getStaticProps() {
+	const featuredPosts = getFeaturedPosts()
+
+	return {
+		props: {
+			posts: JSON.parse(JSON.stringify(featuredPosts)),
+		},
+	}
+}
+
 export default HomePage

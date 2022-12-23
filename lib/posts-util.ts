@@ -1,6 +1,6 @@
 import fs from 'fs'
-import path from 'path'
 import matter from 'gray-matter'
+import path from 'path'
 import { Post, PostData } from '../types/post'
 
 const postsDirectory = path.join(process.cwd(), 'content', 'posts')
@@ -13,7 +13,7 @@ function getPostData(fileName: string) {
 		content: string
 	}
 
-	const postSlug = fileName.replace(/\.md$./, '')
+	const postSlug = fileName.replace(/\.md$/, '')
 
 	const postData = {
 		slug: postSlug,
