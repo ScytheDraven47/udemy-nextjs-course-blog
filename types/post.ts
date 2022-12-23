@@ -22,8 +22,17 @@ export type AllPostsProps = {
 	posts: Post[]
 }
 
+export type PostDetailPageProps = {
+	post: Post
+}
+
 export type PostsGridProps = {
 	posts: Post[]
 }
 
 export type FeaturedPostsProps = PostsGridProps
+
+export type PostContentProps = Pick<
+	Post,
+	'title' | 'image' | 'slug' | 'content'
+>

@@ -5,15 +5,18 @@ import { Post, PostData } from '../types/post'
 
 const postsDirectory = path.join(process.cwd(), 'content', 'posts')
 
-function getPostData(fileName: string) {
-	const filePath = path.join(postsDirectory, fileName)
+export function getPostsFiles() {
+	return fs.readdirSync(postsDirectory)
+}
+
+export function getPostData(postId: string) {
+	const postSlug = postId.replace(/\.md$/i, '')
+	const filePath = path.join(postsDirectory, `${postSlug}.md`)
 	const fileContent = fs.readFileSync(filePath, 'utf-8')
 	const { data, content } = matter(fileContent) as unknown as {
 		data: PostData
 		content: string
 	}
-
-	const postSlug = fileName.replace(/\.md$/, '')
 
 	const postData = {
 		slug: postSlug,
@@ -25,7 +28,7 @@ function getPostData(fileName: string) {
 }
 
 export function getAllPosts() {
-	const postFiles = fs.readdirSync(postsDirectory)
+	const postFiles = getPostsFiles()
 	const allPosts = postFiles.map((postFile) => getPostData(postFile))
 	const sortedPosts = allPosts.sort((postA, postB) =>
 		postA.date > postB.date ? -1 : 1
