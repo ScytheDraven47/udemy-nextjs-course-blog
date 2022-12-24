@@ -15,8 +15,6 @@ const ContactForm = () => {
 			message: enteredMessage,
 		}
 
-		console.log(body)
-
 		fetch('/api/contact', {
 			method: 'POST',
 			body: JSON.stringify(body),
