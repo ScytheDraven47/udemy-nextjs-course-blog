@@ -7,6 +7,14 @@ export type PostData = {
 }
 export type Post = PostData & { slug: string; content: string }
 
+export type ContactData = {
+	email: string
+	name: string
+	message: string
+}
+
+export type ContactDataWithOptionalId = ContactData & { id?: string }
+
 //? PROPS ?//
 export type HomePageProps = {
 	posts: Post[]

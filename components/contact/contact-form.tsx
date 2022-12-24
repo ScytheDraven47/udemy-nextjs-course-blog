@@ -1,27 +1,97 @@
-import { FormEvent, useState } from 'react'
+import { FormEvent, useEffect, useState } from 'react'
+import Notification from '../../components/ui/notification'
+import { ContactData } from '../../types/post'
 import classes from './contact-form.module.css'
+
+enum RequestStatus {
+	PENDING = 'PENDING',
+	SUCCESS = 'SUCCESS',
+	ERROR = 'ERROR',
+}
+
+const sendContactData = async (contactData: ContactData) => {
+	const response = await fetch('/api/contact', {
+		method: 'POST',
+		body: JSON.stringify(contactData),
+		headers: {
+			'Content-Type': 'application/json',
+		},
+	})
+
+	const data = await response.json()
+
+	if (!response.ok) {
+		throw new Error(data.message || 'Something went wrong!')
+	}
+}
 
 const ContactForm = () => {
 	const [enteredEmail, setEnteredEmail] = useState('')
 	const [enteredName, setEnteredName] = useState('')
 	const [enteredMessage, setEnteredMessage] = useState('')
+	const [requestStatus, setRequestStatus] = useState<RequestStatus | null>()
+	const [requestError, setRequestError] = useState('')
 
-	const sendMessageHandler = (event: FormEvent) => {
+	useEffect(() => {
+		if (
+			requestStatus === RequestStatus.SUCCESS ||
+			requestStatus === RequestStatus.ERROR
+		) {
+			const timeout = setTimeout(() => {
+				setRequestError('')
+				setRequestStatus(null)
+			}, 3000)
+
+			return () => {
+				clearTimeout(timeout)
+			}
+		}
+	}, [requestStatus])
+
+	const sendMessageHandler = async (event: FormEvent) => {
 		event.preventDefault()
 
-		const body = {
-			email: enteredEmail,
-			name: enteredName,
-			message: enteredMessage,
+		setRequestStatus(RequestStatus.PENDING)
+		try {
+			await sendContactData({
+				email: enteredEmail,
+				name: enteredName,
+				message: enteredMessage,
+			})
+			setRequestStatus(RequestStatus.SUCCESS)
+			setEnteredEmail('')
+			setEnteredName('')
+			setEnteredMessage('')
+		} catch (error) {
+			setRequestError(error as string)
+			setRequestStatus(RequestStatus.ERROR)
 		}
+	}
 
-		fetch('/api/contact', {
-			method: 'POST',
-			body: JSON.stringify(body),
-			headers: {
-				'Content-Type': 'application/json',
-			},
-		})
+	let notification
+
+	if (requestStatus === RequestStatus.PENDING) {
+		notification = {
+			status: 'pending',
+			title: 'Sending message...',
+			message: 'Your message is on its way!',
+		}
+	}
+
+	if (requestStatus === RequestStatus.SUCCESS) {
+		notification = {
+			status: 'success',
+			title: 'Success!',
+			message: 'Message sent successfully!',
+		}
+	}
+
+	if (requestStatus === RequestStatus.ERROR) {
+		notification = {
+			status: 'error',
+			title: 'Error!',
+			message: requestError,
+		}
 	}
 
 	return (
@@ -35,6 +105,7 @@ const ContactForm = () => {
 							type='email'
 							id='email'
 							required
+							value={enteredEmail}
 							onChange={(event) => setEnteredEmail(event.currentTarget.value)}
 						/>
 					</div>
@@ -44,6 +115,7 @@ const ContactForm = () => {
 							type='text'
 							id='name'
 							required
+							value={enteredName}
 							onChange={(event) => setEnteredName(event.currentTarget.value)}
 						/>
 					</div>
@@ -53,6 +125,7 @@ const ContactForm = () => {
 					<textarea
 						id='message'
 						rows={5}
+						value={enteredMessage}
 						onChange={(event) => setEnteredMessage(event.currentTarget.value)}
 					></textarea>
 				</div>
@@ -60,6 +133,7 @@ const ContactForm = () => {
 					<button>Send Message</button>
 				</div>
 			</form>
+			{notification && <Notification {...notification} />}
 		</section>
 	)
 }

@@ -1,10 +1,11 @@
 import { MongoClient } from 'mongodb'
 import { NextApiRequest, NextApiResponse } from 'next'
+import { ContactDataWithOptionalId } from '../../types/post'
 
 const dbUser = process.env.DB_USER
 const dbPass = process.env.DB_PASS
 const dbName = 'blog-site'
-const dbCollection = ''
+const dbCollection = 'contact'
 
 const handler = async (req: NextApiRequest, res: NextApiResponse) => {
 	if (/^POST$/i.test(req.method as string)) {
@@ -15,12 +16,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
 			return
 		}
 
-		const newMessage: {
-			email: string
-			name: string
-			message: string
-			id?: string
-		} = {
+		const newMessage: ContactDataWithOptionalId = {
 			email,
 			name,
 			message,
@@ -38,7 +34,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
 
 		const db = client.db()
 		try {
-			const result = await db.collection('contact').insertOne(newMessage)
+			const result = await db.collection(dbCollection).insertOne(newMessage)
 			newMessage.id = result.insertedId.toString()
 		} catch (error) {
 			client.close()
