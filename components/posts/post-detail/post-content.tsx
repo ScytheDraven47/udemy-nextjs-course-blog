@@ -2,7 +2,7 @@ import Image from 'next/image'
 import { ElementType } from 'react'
 import ReactMarkdown from 'react-markdown'
 import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter'
-import { oneDark as SyntaxTheme } from 'react-syntax-highlighter/dist/esm/styles/prism'
+import { atomDark as SyntaxTheme } from 'react-syntax-highlighter/dist/cjs/styles/prism'
 import { PostContentProps } from '../../../types/post'
 import classes from './post-content.module.css'
 import PostHeader from './post-header'
@@ -47,7 +47,6 @@ const PostContent = ({
 			return <p>{children}</p>
 		},
 		code(code) {
-			console.log(code)
 			const { className: language, children } = code
 			return (
 				<SyntaxHighlighter
