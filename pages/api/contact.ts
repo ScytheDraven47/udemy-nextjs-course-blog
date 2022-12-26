@@ -30,6 +30,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
 		} catch (error) {
 			res.status(500).json({
 				message: 'Could not connect to database!',
+				detail: { connectionString }, // TODO remove
 			})
 			return
 		}
