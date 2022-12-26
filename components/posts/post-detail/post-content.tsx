@@ -1,11 +1,22 @@
 import Image from 'next/image'
 import { ElementType } from 'react'
 import ReactMarkdown from 'react-markdown'
-import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter'
-import { atomDark as SyntaxTheme } from 'react-syntax-highlighter/dist/cjs/styles/prism'
+import { PrismLight as SyntaxHighlighter } from 'react-syntax-highlighter'
+import css from 'react-syntax-highlighter/dist/cjs/languages/prism/css'
+import js from 'react-syntax-highlighter/dist/cjs/languages/prism/javascript'
+import jsx from 'react-syntax-highlighter/dist/cjs/languages/prism/jsx'
+import tsx from 'react-syntax-highlighter/dist/cjs/languages/prism/tsx'
+import ts from 'react-syntax-highlighter/dist/cjs/languages/prism/typescript'
+import SyntaxTheme from 'react-syntax-highlighter/dist/cjs/styles/prism/atom-dark'
 import { PostContentProps } from '../../../types/post'
 import classes from './post-content.module.css'
 import PostHeader from './post-header'
+
+SyntaxHighlighter.registerLanguage('css', css)
+SyntaxHighlighter.registerLanguage('js', js)
+SyntaxHighlighter.registerLanguage('jsx', jsx)
+SyntaxHighlighter.registerLanguage('tsx', tsx)
+SyntaxHighlighter.registerLanguage('ts', ts)
 
 const getImagePath = (slug: string, src: string) =>
 	`/images/posts/${slug}/${src}`
