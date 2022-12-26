@@ -4,7 +4,8 @@ import { ContactDataWithOptionalId } from '../../types/post'
 
 const dbUser = process.env.DB_USER
 const dbPass = process.env.DB_PASS
-const dbName = 'blog-site'
+const dbCluster = process.env.DB_CLUSTER
+const dbName = process.env.DB_NAME
 const dbCollection = 'contact'
 
 const handler = async (req: NextApiRequest, res: NextApiResponse) => {
@@ -25,7 +26,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
 		let client
 		try {
 			client = await MongoClient.connect(
-				`mongodb+srv://${dbUser}:${dbPass}@cluster0.dbejtkw.mongodb.net/${dbName}?retryWrites=true&w=majority`
+				`mongodb+srv://${dbUser}:${dbPass}@${dbCluster}.dbejtkw.mongodb.net/${dbName}?retryWrites=true&w=majority`
 			)
 		} catch (error) {
 			res.status(500).json({ message: 'Could not connect to database!' })
